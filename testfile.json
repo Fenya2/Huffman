@@ -1,0 +1,518 @@
+ TreeNode {
+  letter: 'a',
+  weight: 5,
+  parent: null,
+  sons: null,
+  num: 0,
+  isUsed: false
+},
+  TreeNode {
+  letter: 'b',
+  weight: 2,
+  parent: null,
+  sons: null,
+  num: 1,
+  isUsed: false
+},
+  TreeNode {
+  letter: 'r',
+  weight: 2,
+  parent: null,
+  sons: null,
+  num: 2,
+  isUsed: false
+},
+  TreeNode {
+  letter: 'k',
+  weight: 1,
+  parent: TreeNode {
+  letter: '',
+  weight: 2,
+  parent: null,
+  sons: [Array],
+  num: 5,
+  isUsed: false
+},
+  sons: null,
+  num: 3,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'd',
+  weight: 1,
+  parent: TreeNode {
+  letter: '',
+  weight: 2,
+  parent: null,
+  sons: [Array],
+  num: 5,
+  isUsed: false
+},
+  sons: null,
+  num: 4,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 2,
+  parent: null,
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 5,
+  isUsed: false
+}
+]
+[
+  TreeNode {
+  letter: 'a',
+  weight: 5,
+  parent: null,
+  sons: null,
+  num: 0,
+  isUsed: false
+},
+  TreeNode {
+  letter: 'b',
+  weight: 2,
+  parent: TreeNode {
+  letter: '',
+  weight: 4,
+  parent: null,
+  sons: [Array],
+  num: 6,
+  isUsed: false
+},
+  sons: null,
+  num: 1,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'r',
+  weight: 2,
+  parent: TreeNode {
+  letter: '',
+  weight: 4,
+  parent: null,
+  sons: [Array],
+  num: 6,
+  isUsed: false
+},
+  sons: null,
+  num: 2,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'k',
+  weight: 1,
+  parent: TreeNode {
+  letter: '',
+  weight: 2,
+  parent: null,
+  sons: [Array],
+  num: 5,
+  isUsed: false
+},
+  sons: null,
+  num: 3,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'd',
+  weight: 1,
+  parent: TreeNode {
+  letter: '',
+  weight: 2,
+  parent: null,
+  sons: [Array],
+  num: 5,
+  isUsed: false
+},
+  sons: null,
+  num: 4,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 2,
+  parent: null,
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 5,
+  isUsed: false
+},
+  TreeNode {
+  letter: '',
+  weight: 4,
+  parent: null,
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 6,
+  isUsed: false
+}
+]
+[
+  TreeNode {
+  letter: 'a',
+  weight: 5,
+  parent: null,
+  sons: null,
+  num: 0,
+  isUsed: false
+},
+  TreeNode {
+  letter: 'b',
+  weight: 2,
+  parent: TreeNode {
+  letter: '',
+  weight: 4,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 6,
+  isUsed: true
+},
+  sons: null,
+  num: 1,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'r',
+  weight: 2,
+  parent: TreeNode {
+  letter: '',
+  weight: 4,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 6,
+  isUsed: true
+},
+  sons: null,
+  num: 2,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'k',
+  weight: 1,
+  parent: TreeNode {
+  letter: '',
+  weight: 2,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 5,
+  isUsed: true
+},
+  sons: null,
+  num: 3,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'd',
+  weight: 1,
+  parent: TreeNode {
+  letter: '',
+  weight: 2,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 5,
+  isUsed: true
+},
+  sons: null,
+  num: 4,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 2,
+  parent: TreeNode {
+  letter: '',
+  weight: 6,
+  parent: null,
+  sons: [Array],
+  num: 7,
+  isUsed: false
+},
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 5,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 4,
+  parent: TreeNode {
+  letter: '',
+  weight: 6,
+  parent: null,
+  sons: [Array],
+  num: 7,
+  isUsed: false
+},
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 6,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 6,
+  parent: null,
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 7,
+  isUsed: false
+}
+]
+[
+  TreeNode {
+  letter: 'a',
+  weight: 5,
+  parent: TreeNode {
+  letter: '',
+  weight: 11,
+  parent: null,
+  sons: [Array],
+  num: 8,
+  isUsed: false
+},
+  sons: null,
+  num: 0,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'b',
+  weight: 2,
+  parent: TreeNode {
+  letter: '',
+  weight: 4,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 6,
+  isUsed: true
+},
+  sons: null,
+  num: 1,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'r',
+  weight: 2,
+  parent: TreeNode {
+  letter: '',
+  weight: 4,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 6,
+  isUsed: true
+},
+  sons: null,
+  num: 2,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'k',
+  weight: 1,
+  parent: TreeNode {
+  letter: '',
+  weight: 2,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 5,
+  isUsed: true
+},
+  sons: null,
+  num: 3,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'd',
+  weight: 1,
+  parent: TreeNode {
+  letter: '',
+  weight: 2,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 5,
+  isUsed: true
+},
+  sons: null,
+  num: 4,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 2,
+  parent: TreeNode {
+  letter: '',
+  weight: 6,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 7,
+  isUsed: true
+},
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 5,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 4,
+  parent: TreeNode {
+  letter: '',
+  weight: 6,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 7,
+  isUsed: true
+},
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 6,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 6,
+  parent: TreeNode {
+  letter: '',
+  weight: 11,
+  parent: null,
+  sons: [Array],
+  num: 8,
+  isUsed: false
+},
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 7,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 11,
+  parent: null,
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 8,
+  isUsed: false
+}
+]
+[
+  TreeNode {
+  letter: 'a',
+  weight: 5,
+  parent: TreeNode {
+  letter: '',
+  weight: 11,
+  parent: null,
+  sons: [Array],
+  num: 8,
+  isUsed: false
+},
+  sons: null,
+  num: 0,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'b',
+  weight: 2,
+  parent: TreeNode {
+  letter: '',
+  weight: 4,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 6,
+  isUsed: true
+},
+  sons: null,
+  num: 1,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'r',
+  weight: 2,
+  parent: TreeNode {
+  letter: '',
+  weight: 4,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 6,
+  isUsed: true
+},
+  sons: null,
+  num: 2,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'k',
+  weight: 1,
+  parent: TreeNode {
+  letter: '',
+  weight: 2,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 5,
+  isUsed: true
+},
+  sons: null,
+  num: 3,
+  isUsed: true
+  },
+  TreeNode {
+  letter: 'd',
+  weight: 1,
+  parent: TreeNode {
+  letter: '',
+  weight: 2,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 5,
+  isUsed: true
+},
+  sons: null,
+  num: 4,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 2,
+  parent: TreeNode {
+  letter: '',
+  weight: 6,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 7,
+  isUsed: true
+},
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 5,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 4,
+  parent: TreeNode {
+  letter: '',
+  weight: 6,
+  parent: [TreeNode],
+  sons: [Array],
+  num: 7,
+  isUsed: true
+},
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 6,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 6,
+  parent: TreeNode {
+  letter: '',
+  weight: 11,
+  parent: null,
+  sons: [Array],
+  num: 8,
+  isUsed: false
+},
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 7,
+  isUsed: true
+  },
+  TreeNode {
+  letter: '',
+  weight: 11,
+  parent: null,
+  sons: [ [TreeNode], [TreeNode] ],
+  num: 8,
+  isUsed: false
+}
+]}
+
