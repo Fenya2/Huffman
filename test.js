@@ -24,4 +24,23 @@
 
 //console.log('abc'.split("").reverse().join());
 
-console.log(String.fromCharCode(0b01000011));
+// console.log(String.fromCharCode(0b01000011));
+//
+// a = 'какой-то текст для проверки. Похоже, что substring будет перескакивать на начало строки, если длина вышла за рамку';
+// codes = [];
+// for (let i = 0; i < a.length; i+=8) {
+//     codes.push(a.slice(i, i+8));
+// }
+// console.log(codes);
+
+//console.log(parseInt('100',2));
+a = 2
+//console.log(String(a.toString(2)));
+
+//console.log('avamaria'.concat('deusvult').slice(0,-4));
+
+a = 'love you';
+a = 'i '.concat(a);
+console.log(a);
+//console.log('0'.repeat(2));
+

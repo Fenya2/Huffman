@@ -1,3 +1,4 @@
+const fs = require("fs");
 
 function makeSeries(sequence) {
     let series = {};
@@ -92,24 +93,56 @@ function Tree(treeLeaves) {
 function HuffmansCoder(codeTable) {
     this.codeTable = codeTable;
     this.decodeTable = {};
+    this.codedSequence = '';
     Object.entries(codeTable).forEach((value) =>{
         this.decodeTable[value[1]] = value[0];
     })
-    this.encode = function (inputSequence, fileName) {
+    this.encode = function (inputSequence) {
         let outputSequence =  '';
         for(let i = 0; i < inputSequence.length; i++) {
             if(this.codeTable[`${inputSequence.charAt(i)}`]) {
-                outputSequence += this.codeTable[`${inputSequence.charAt(i)}`];
+                outputSequence += this.codeTable[`${inputSequence[i]}`];
             }
             else throw Error(`there is not [${inputSequence.charAt(i)}] symbol in code table`);
         }
-        // WRITE IN FILE.
-        // the fist byte of file contains, how much bits of file's last byte not enter into an encoded sequence.
-        let divisionRemainder = outputSequence.length % 8;
-
         return outputSequence;
     }
-    this.decode = function (inputSequence, fileName) { //todo сделать побитовое чтение файла
+    this.encodeToFile = function (inputSequence, fileName) {
+        let encodedSequence =  this.encode(inputSequence);
+        // transform for squeeze
+        //console.log('0 - ',outputSequence);
+        let divisionReminder = encodedSequence.length % 8;
+        encodedSequence += '0'.repeat(8 - divisionReminder);
+        let fileOutputSequence = String.fromCharCode(divisionReminder);
+        for(let i = 0; i < encodedSequence.length; i+=8) {
+            //console.log(parseInt(outputSequence.slice(i, i+8),2), outputSequence.slice(i, i+8));
+            fileOutputSequence += String.fromCharCode(parseInt(encodedSequence.slice(i, i+8),2));
+        }
+        //console.log('1 - ',outputSequence);
+        fileOutputSequence += String.fromCharCode(parseInt(encodedSequence.slice(0, -8),2));
+        require('fs').writeFileSync(fileName, fileOutputSequence);
+        //console.log(charCodes);
+    }
+    this.decodeFromFile = function (inputFilename) {
+        const fs = require('fs');
+        //console.log(fs.readFileSync(inputFilename).toString());
+        let inputSequence = fs.readFileSync(inputFilename).toString();
+        let codeSequence = '';
+        let divisionReminder = inputSequence.charCodeAt(0);
+        for(let i = 1; i < inputSequence.length-1; i++) { //todo length-1 ?????????????
+            let byteCode = inputSequence.charCodeAt(i).toString(2);
+            while (byteCode.length < 8) {
+                byteCode = '0'.concat(byteCode);
+            }
+            codeSequence += byteCode;
+        }
+        //console.log('3 - ',codeSequence);
+        codeSequence = codeSequence.slice(0, (divisionReminder-8));
+        //console.log('4 - ',codeSequence);
+        //console.log(divisionReminder);
+        return this.decode(codeSequence);
+    }
+    this.decode = function (inputSequence) { //todo сделать побитовое чтение файла
         let outputSequence = '';
         for(let i = 0; i < inputSequence.length; i++) {
             let charCodeFound = false;
@@ -123,13 +156,9 @@ function HuffmansCoder(codeTable) {
                 else i++;
             }
         }
-        //divisionReminder = outputSequence.length % 8;
-
         return outputSequence;
     }
 }
-
-
 
 function get2minimalNumsIndexes(nums) { //min nums.length - 3. Return minimal nums indexes in array(minmin, min)
     let minmin = nums[0] <= nums[1] ? [0,nums[0]] : [1, nums[1]]; // [index in nums, value]
@@ -150,12 +179,13 @@ function sum(a,b) {
 
 let inputSequence = "abrakadabra";
 let series = makeSeries(inputSequence);
-console.log(inputSequence.length);
+//console.log(inputSequence.length);
 let leaves = makeLeaves(series);
-console.log(series);
+//console.log(series);
 let tree = new Tree(leaves);
 let codeTable = tree.getCodeTable();
 coder = new HuffmansCoder(codeTable);
 console.log(coder.codeTable);
-codedSequence = coder.encode(inputSequence);
-console.log(codedSequence);
+console.log(coder.encode('barak'));
+coder.encodeToFile(inputSequence,'output.txt');
+console.log(coder.decodeFromFile('output.txt'));
