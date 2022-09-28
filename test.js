@@ -39,8 +39,11 @@ a = 2
 
 //console.log('avamaria'.concat('deusvult').slice(0,-4));
 
-a = 'love you';
-a = 'i '.concat(a);
-console.log(a);
+// a = 'love you';
+// a = 'i '.concat(a);
+// console.log(a);
 //console.log('0'.repeat(2));
 
+obj = {a:2};
+if(Object.keys(obj).length === 0) console.log('true');
+else console.log('false');
