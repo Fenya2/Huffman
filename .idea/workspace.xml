@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="835bea19-f333-46fb-a1d0-d71b6ca5f1f8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testfile.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +46,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Node.js.main.js">
+  <component name="RunManager" selected="Node.js.test.js">
     <configuration name="main.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/main.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -53,8 +55,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.main.js" />
         <item itemvalue="Node.js.test.js" />
+        <item itemvalue="Node.js.main.js" />
       </list>
     </recent_temporary>
   </component>
@@ -79,7 +81,8 @@
       <workItem from="1664254864340" duration="373000" />
       <workItem from="1664257204663" duration="8000" />
       <workItem from="1664375044743" duration="4058000" />
-      <workItem from="1664390300110" duration="5723000" />
+      <workItem from="1664390300110" duration="6219000" />
+      <workItem from="1664469388196" duration="12898000" />
     </task>
     <servers />
   </component>
