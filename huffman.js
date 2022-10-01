@@ -121,6 +121,7 @@ function HuffmansCoder(codeTable) {
             fileOutputSequence += String.fromCharCode(parseInt(encodedSequence.slice(i, i+8),2));
         }
         require('fs').writeFileSync(fileName, fileOutputSequence);
+        return fileOutputSequence;
     }
     this.decodeFromFile = function (inputFilename) {
         const fs = require('fs');
@@ -148,7 +149,7 @@ function HuffmansCoder(codeTable) {
                     outputSequence += this.decodeTable[`${charCode}`];
                     charCodeFound = true;
                 }
-                else i++;
+                else i++;clarg
             }
         }
         return outputSequence;
@@ -178,50 +179,59 @@ function get2minimalNumsIndexes(nums) { //min nums.length - 3. Return minimal nu
 }
 
 function getHelp() {
-    console.log('HELP!');
+    console.log(require('fs').readFileSync('Help.txt').toString());
 }
 
-
-let inputSequence = null;
-switch (process.argv[2]) {
-    case 'code':
+function getInputSequence(clArg) {
+    let inputSequence;
+    try {
+        inputSequence = clArg;
+        if (!inputSequence) throw new SyntaxError("Enter sequence you want to code");
+    }
+    catch (e) {
+        console.error(e.message);
+        getHelp();
+        return null;
+    }
+    if(inputSequence.match(/^!/g)) inputSequence = inputSequence.replace("!", '');
+    else {
         try {
-            inputSequence = process.argv[3];
-            if (!inputSequence) throw new SyntaxError("Enter sequence you want to code");
-        }
-        catch (e) {
-            console.error(e.message);
-            getHelp();
-            break;
-        }
-        try {
-            inputSequence = require('fs').readFileSync(inputSequence).toString();
+            inputSequence = require('fs').readFileSync(clArg).toString();
         } catch (e) {
             console.error(e.message);
             getHelp();
-            break;
+            return null;
         }
-        let tree = new Tree(makeLeaves(makeSeries(inputSequence)));
-        let coder = new HuffmansCoder(tree.getCodeTable());
+    }
+    return inputSequence;
+}
+
+
+let inputSequence = getInputSequence(process.argv[3]);
+let coder = null;
+let tree = {};
+switch (process.argv[2]) {
+    case 'code':
+        tree = new Tree(makeLeaves(makeSeries(inputSequence)));
+        coder = new HuffmansCoder(tree.getCodeTable());
         console.log(coder.codeTable);
         coder.saveCodeTable('codeTable.json');
         console.log(coder.encode(inputSequence));
         break;
     case 'decode':
-        try {
-            inputSequence = process.argv[3];
-            if (!inputSequence) throw new SyntaxError("Enter sequence you want to decode");
-        } catch (e) {
-            console.error(e.message);
-            getHelp();
-            break;
-        }
-        let decoder;
-        try{
-            decoder = new HuffmansCoder(JSON.parse(require('fs').readFileSync('codeTable.json').toString()));
-        } catch (e) {
-            console.error(e.message);
-        }
-        console.log(decoder.decode(inputSequence));
+        coder = new HuffmansCoder(JSON.parse(require('fs').readFileSync('codeTable.json').toString()));
+        console.log(coder.decode(inputSequence));
         break;
+    case 'codeToFile':
+        tree = new Tree(makeLeaves(makeSeries(inputSequence)));
+        coder = new HuffmansCoder(tree.getCodeTable());
+        console.log(coder.codeTable);
+        coder.saveCodeTable('codeTable.json');
+        console.log(coder.encodeToFile(inputSequence, 'out.coded'));
+        break;
+    case 'decodeFromFile':
+        coder = new HuffmansCoder(JSON.parse(require('fs').readFileSync('codeTable.json').toString()));
+        console.log(coder.decodeFromFile(process.argv[3]));
+        break;
+    default: getHelp();
 }

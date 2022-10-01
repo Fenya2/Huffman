@@ -48,10 +48,10 @@ a = 2
 // if(Object.keys(obj).length === 0) console.log('true');
 // else console.log('false');
 
-a = '"какой-то текст, который нужно воспринмать как строку"';
-regexp = /^"."$/g;
-if(a.match(regexp)) console.log(true);
-else console.log(false);
+// a = '!!!!какой-то текст, который нужно воспринмать как строку"';
+// regexp = /^!/g;
+// if(a.match(regexp)) console.log(true);
+// else console.log(false);
 
 // a = '"some text"';
 // console.log(a.replace(/^"|"$/g, ''));
