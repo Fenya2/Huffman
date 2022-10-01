@@ -11,6 +11,6 @@ codeToFile - make codeTable of SEQUENCE's symbols using Huffman-algorithm(tree).
 
 decodeFromFile - decode SEQUENCE from file using code table in 'codeTable.json'. print result.
 
-[!] without take sequence as string, with - like a file name where take SEQUENCE (for code, decode, codeToFile commands).
+[!] without take sequence as string, with - as a file name where take SEQUENCE (for code, decode, codeToFile commands).
 
 p.s Нужно добавить больше проверок. Но вроде работает...
