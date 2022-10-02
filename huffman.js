@@ -29,6 +29,28 @@ function Tree(treeLeaves) {
     this.tree = [];
     this.codeTable = {};
 
+    this.getNodeCode = function (code, treeNode) {
+        this.code = code;
+        if(treeNode.parent === null) { //if in root of the tree
+            return this.code.split("").reverse().join().replace(/[\s,]/g, '');
+        }
+        if(treeNode.parent.sons[0].num  === treeNode.num) {
+            return this.getNodeCode(this.code+='0', treeNode.parent);
+        }
+        else if(treeNode.parent.sons[1].num  === treeNode.num) {
+            return this.getNodeCode(this.code+='1', treeNode.parent);
+        }
+    }
+    this.generateCodeTable =  function () {
+        for(let i = 0; i < this.treeLeaves.length; i++) {
+            this.codeTable[`${this.tree[i].letter}`] = this.getNodeCode('', this.tree[i]);
+        }
+        return this.codeTable;
+    }
+    this.getCodeTable = function () {
+        if(Object.keys(this.codeTable).length === 0) return this.generateCodeTable();
+        return this.codeTable;
+    }
 
     this.have2UnusedNodes = function () { // 2 because last parent node will be unused
         let counter = 0;
@@ -37,6 +59,11 @@ function Tree(treeLeaves) {
             if(counter === 2) return true;
         }
         return false;
+    }
+
+    if(treeLeaves.length === 1) {
+        this.codeTable[this.treeLeaves[0].letter] = '0';
+        return;
     }
 
     for(let i = 0; i < this.treeLeaves.length; i++) { // add leaves
@@ -67,30 +94,6 @@ function Tree(treeLeaves) {
         this.tree[son2.num].isUsed = true;
         this.tree[son1.num].parent = this.tree[this.tree.length - 1]; //link the son1 with new parent
         this.tree[son2.num].parent = this.tree[this.tree.length - 1]; //link the son2 with new parent
-    }
-
-    this.getNodeCode = function (code, treeNode) {
-        this.code = code;
-        if(treeNode.parent === null) { //if in root of the tree
-            return this.code.split("").reverse().join().replace(/[\s,]/g, '');
-        }
-        if(treeNode.parent.sons[0].num  === treeNode.num) {
-            return this.getNodeCode(this.code+='0', treeNode.parent);
-        }
-        else if(treeNode.parent.sons[1].num  === treeNode.num) {
-            return this.getNodeCode(this.code+='1', treeNode.parent);
-        }
-    }
-    this.generateCodeTable =  function () {
-        for(let i = 0; i < this.treeLeaves.length; i++) {
-            this.codeTable[`${this.tree[i].letter}`] = this.getNodeCode('', this.tree[i]);
-        }
-        return this.codeTable;
-    }
-    this.getCodeTable = function () {
-        if(Object.keys(this.codeTable).length === 0)
-            return this.generateCodeTable();
-        else return this.codeTable;
     }
 }
 
@@ -149,7 +152,7 @@ function HuffmansCoder(codeTable) {
                     outputSequence += this.decodeTable[`${charCode}`];
                     charCodeFound = true;
                 }
-                else i++;clarg
+                else i++;
             }
         }
         return outputSequence;
