@@ -1,10 +1,12 @@
-function TreeNode(letter, weight, parent, sons, num, isUsed) { //parent and Sons([]) must have a Node type
-    this.letter = letter;
-    this.weight = weight;
-    this.parent = parent;
-    this.sons = sons;
-    this.num = num;
-    this.isUsed = isUsed;
+class TreeNode { //parent and Sons([]) must have a Node type
+    constructor(letter, weight, parent, sons, num, isUsed) {
+        this.letter = letter;
+        this.weight = weight;
+        this.parent = parent;
+        this.sons = sons;
+        this.num = num;
+        this.isUsed = isUsed;
+    }
 }
 
 function makeSeries(sequence) {
@@ -24,12 +26,48 @@ function makeLeaves(series) {
     return leaves;
 }
 
-function Tree(treeLeaves) {
-    this.treeLeaves = treeLeaves;
-    this.tree = [];
-    this.codeTable = {};
+class Tree {
+    constructor(treeleaves) {
+        this.treeLeaves = treeleaves;
+        this.tree = [];
+        this.codeTable = {};
 
-    this.getNodeCode = function (code, treeNode) {
+        if(this.treeLeaves.length === 1) {
+            this.codeTable[this.treeLeaves[0].letter] = '0';
+            return;
+        }
+
+        for(let i = 0; i < this.treeLeaves.length; i++) { // add leaves
+            this.treeLeaves[i].num = i;
+            this.tree.push(this.treeLeaves[i]);
+        }
+        while (this.have2UnusedNodes()) { // tree creating
+            let unusedNodes = [];
+            for (let i = 0; i < this.tree.length; i++) { // find unused nodes
+                if (!this.tree[i].isUsed) {
+                    unusedNodes.push(this.tree[i]);
+                }
+            }
+            let NodesWeights = new Array(unusedNodes.length);
+            for (let i = 0; i < unusedNodes.length; i++) {
+                NodesWeights[i] = unusedNodes[i].weight;
+            }
+
+            let minWeightsIndexes = get2minimalNumsIndexes(NodesWeights);
+            let son1 = unusedNodes[minWeightsIndexes[0]];
+            let son2 = unusedNodes[minWeightsIndexes[1]];
+            let sons = [son1, son2];
+            let sonsWeight = son1.weight + son2.weight;
+
+            this.tree.push(new TreeNode(`${son1.letter}${son2.letter}`, sonsWeight, null, sons, 0, false));
+            this.tree[this.tree.length-1].num = this.tree.length - 1;
+            this.tree[son1.num].isUsed = true;
+            this.tree[son2.num].isUsed = true;
+            this.tree[son1.num].parent = this.tree[this.tree.length - 1]; //link the son1 with new parent
+            this.tree[son2.num].parent = this.tree[this.tree.length - 1]; //link the son2 with new parent
+        }
+    }
+    getNodeCode (code, treeNode) {
         this.code = code;
         if(treeNode.parent === null) { //if in root of the tree
             return this.code.split("").reverse().join().replace(/[\s,]/g, '');
@@ -41,18 +79,18 @@ function Tree(treeLeaves) {
             return this.getNodeCode(this.code+='1', treeNode.parent);
         }
     }
-    this.generateCodeTable =  function () {
+    generateCodeTable (){
         for(let i = 0; i < this.treeLeaves.length; i++) {
             this.codeTable[`${this.tree[i].letter}`] = this.getNodeCode('', this.tree[i]);
         }
         return this.codeTable;
     }
-    this.getCodeTable = function () {
+    getCodeTable () {
         if(Object.keys(this.codeTable).length === 0) return this.generateCodeTable();
         return this.codeTable;
     }
 
-    this.have2UnusedNodes = function () { // 2 because last parent node will be unused
+    have2UnusedNodes () { // 2 because last parent node will be unused
         let counter = 0;
         for(let i = 0; i < this.tree.length; i++) {
             if(!this.tree[i].isUsed) counter++;
@@ -60,51 +98,19 @@ function Tree(treeLeaves) {
         }
         return false;
     }
-
-    if(treeLeaves.length === 1) {
-        this.codeTable[this.treeLeaves[0].letter] = '0';
-        return;
-    }
-
-    for(let i = 0; i < this.treeLeaves.length; i++) { // add leaves
-        treeLeaves[i].num = i;
-        this.tree.push(treeLeaves[i]);
-    }
-    while (this.have2UnusedNodes()) { // tree creating
-        let unusedNodes = [];
-        for (let i = 0; i < this.tree.length; i++) { // find unused nodes
-            if (!this.tree[i].isUsed) {
-                unusedNodes.push(this.tree[i]);
-            }
-        }
-        let NodesWeights = new Array(unusedNodes.length);
-        for (let i = 0; i < unusedNodes.length; i++) {
-            NodesWeights[i] = unusedNodes[i].weight;
-        }
-
-        let minWeightsIndexes = get2minimalNumsIndexes(NodesWeights);
-        let son1 = unusedNodes[minWeightsIndexes[0]];
-        let son2 = unusedNodes[minWeightsIndexes[1]];
-        let sons = [son1, son2];
-        let sonsWeight = son1.weight + son2.weight;
-
-        this.tree.push(new TreeNode(`${son1.letter}${son2.letter}`, sonsWeight, null, sons, 0, false));
-        this.tree[this.tree.length-1].num = this.tree.length - 1;
-        this.tree[son1.num].isUsed = true;
-        this.tree[son2.num].isUsed = true;
-        this.tree[son1.num].parent = this.tree[this.tree.length - 1]; //link the son1 with new parent
-        this.tree[son2.num].parent = this.tree[this.tree.length - 1]; //link the son2 with new parent
-    }
 }
 
-function HuffmansCoder(codeTable) {
-    this.codeTable = codeTable;
-    this.decodeTable = {};
-    Object.entries(codeTable).forEach((value) =>{ // make decode table (code:letter)
-        this.decodeTable[value[1]] = value[0];
-    })
+class HuffmansCoder {
 
-    this.encode = function (inputSequence) {
+    constructor(codeTable) {
+        this.codeTable = codeTable;
+        this.decodeTable = {};
+        Object.entries(codeTable).forEach((value) =>{ // make decode table (code:letter)
+            this.decodeTable[value[1]] = value[0];
+        })
+    }
+
+    encode(inputSequence) {
         let outputSequence =  '';
         for(let i = 0; i < inputSequence.length; i++) {
             if(this.codeTable[`${inputSequence.charAt(i)}`]) {
@@ -115,7 +121,7 @@ function HuffmansCoder(codeTable) {
         return outputSequence;
     }
 
-    this.encodeToFile = function (inputSequence, fileName) {
+    encodeToFile(inputSequence, fileName) {
         let encodedSequence =  this.encode(inputSequence);
         let divisionReminder = encodedSequence.length % 8;
         encodedSequence += '0'.repeat(8 - divisionReminder);
@@ -126,7 +132,8 @@ function HuffmansCoder(codeTable) {
         require('fs').writeFileSync(fileName, fileOutputSequence);
         return fileOutputSequence;
     }
-    this.decodeFromFile = function (inputFilename) {
+
+    decodeFromFile(inputFilename) {
         const fs = require('fs');
         let inputSequence = fs.readFileSync(inputFilename).toString();
         let codeSequence = '';
@@ -141,7 +148,8 @@ function HuffmansCoder(codeTable) {
         codeSequence = codeSequence.slice(0, (divisionReminder-8));
         return this.decode(codeSequence);
     }
-    this.decode = function (inputSequence) { //todo can add check that code (letters or number?) in inputSequence decodes in decodeTable.
+
+    decode(inputSequence) { //todo can add check that code (letters or number?) in inputSequence decodes in decodeTable.
         let outputSequence = '';
         for(let i = 0; i < inputSequence.length; i++) {
             let charCodeFound = false;
@@ -157,7 +165,8 @@ function HuffmansCoder(codeTable) {
         }
         return outputSequence;
     }
-    this.saveCodeTable = function(fileName) {
+
+    saveCodeTable(fileName) {
         try {
             require('fs').writeFileSync(fileName, JSON.stringify(this.codeTable));
         } catch (e) {
@@ -165,7 +174,7 @@ function HuffmansCoder(codeTable) {
             return null;
         }
         return this.codeTable;
-    };
+    }
 }
 
 function get2minimalNumsIndexes(nums) { //min nums.length - 3. Return minimal nums indexes in array(minmin, min)
@@ -208,7 +217,6 @@ function getInputSequence(clArg) {
     }
     return inputSequence;
 }
-
 
 let inputSequence = getInputSequence(process.argv[3]);
 let coder = null;
